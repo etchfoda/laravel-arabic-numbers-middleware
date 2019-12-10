@@ -1,5 +1,5 @@
 {
-    "name": "yemenifree/laravel-arabic-numbers-middleware",
+    "name": "etchfoda/laravel-arabic-numbers-middleware",
     "type": "library",
     "description": "auto transforms arabic/eastern to eastern/arabic numbers for i.e ١٢٣٤٥٦٧٨ to 12345678",
     "keywords": [
@@ -14,7 +14,7 @@
         "arabic",
         "numbers"
     ],
-    "homepage": "https://github.com/yemenifree/laravel-arabic-numbers-middleware",
+    "homepage": "https://github.com/etchfoda/laravel-arabic-numbers-middleware",
     "license": "MIT",
     "authors": [
         {
