@@ -15,7 +15,39 @@ abstract class BaseNumbersMiddleware extends TransformsRequest
     protected $from = 'eastern';
 
     /** @var array */
-    protected $easternNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    protected $easternNumbers = [
+        '٠'=> '0',
+        '۰'=> '0',
+        '١'=> '1',
+        '۱'=> '1',
+        '٢'=> '2',
+        '۲'=> '2',
+        '٣'=> '3',
+        '۳'=> '3',
+        '٤'=> '4',
+        '٥'=> '5',
+        '٦'=> '6',
+        '٧'=> '7',
+        '۷'=> '7',
+        '٨'=> '8',
+        '۸'=> '8',
+        '٩'=> '9',
+        '۹'=> '9',
+    ];
+
+    /** @var array */
+    protected $arabicNumbers = [
+        '0' => '٠',
+        '1' => '١',
+        '2' => '٢',
+        '3' => '٣',
+        '4' => '٤',
+        '5' => '٥',
+        '6' => '٦',
+        '7' => '٧',
+        '8' => '٨',
+        '9' => '٩',
+    ];
 
     /** @var array|mixed */
     protected $config;
@@ -40,16 +72,16 @@ abstract class BaseNumbersMiddleware extends TransformsRequest
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  array  ...$attributes
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
+     * @param array ...$attributes
      * @return mixed
      */
     public function handle($request, \Closure $next, ...$attributes)
     {
         $this->attributes = $attributes;
 
-        return parent::handle($request,$next);
+        return parent::handle($request, $next);
     }
 
     /**
@@ -76,8 +108,8 @@ abstract class BaseNumbersMiddleware extends TransformsRequest
     /**
      * Transform the given value.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      * @return mixed
      */
     protected function transform($key, $value)
@@ -107,7 +139,7 @@ abstract class BaseNumbersMiddleware extends TransformsRequest
      */
     protected function getNumbers(): array
     {
-        return $this->isFromEastern() ? array_flip($this->getEasternNumbers()) : $this->getEasternNumbers();
+        return $this->isFromEastern() ? $this->getArabicNumbers() : $this->getEasternNumbers();
     }
 
     /**
@@ -128,5 +160,15 @@ abstract class BaseNumbersMiddleware extends TransformsRequest
     public function getEasternNumbers(): array
     {
         return $this->easternNumbers;
+    }
+
+    /**
+     * Get eastern numbers array.
+     *
+     * @return array
+     */
+    public function getArabicNumbers(): array
+    {
+        return $this->arabicNumbers;
     }
 }
